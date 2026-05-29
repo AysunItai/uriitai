@@ -35,6 +35,11 @@ export default function Footer() {
                   § 04 · Conversation
                 </a>
               </li>
+              <li>
+                <a className="hover:text-accent" href="#correspondence">
+                  § 05 · Correspondence
+                </a>
+              </li>
             </ul>
           </div>
           <div className="col-span-6 md:col-span-3">
