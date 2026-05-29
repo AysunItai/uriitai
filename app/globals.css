@@ -1,26 +1,120 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Paper-and-ink palette: warm ivory, deep ink, single oxblood accent. */
+  --color-paper: #efeae0;
+  --color-paper-deep: #e8e1d3;
+  --color-ink: #14110f;
+  --color-ink-soft: #2a2520;
+  --color-muted: #6b6358;
+  --color-rule: #c9c1b3;
+  --color-accent: #8b3a1f;
+  --color-accent-soft: #a64a2c;
+
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --tracking-display: -0.04em;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    /* Light-only by default — this is a printed-paper feel.  */
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    background:
+      radial-gradient(
+        1200px 800px at 15% -10%,
+        rgba(139, 58, 31, 0.06),
+        transparent 60%
+      ),
+      radial-gradient(
+        900px 700px at 110% 10%,
+        rgba(20, 17, 15, 0.05),
+        transparent 60%
+      ),
+      var(--color-paper);
+  }
+
+  /* Subtle paper grain — a CSS-only fiber texture, no image needed.  */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        rgba(20, 17, 15, 0.012) 0px,
+        rgba(20, 17, 15, 0.012) 1px,
+        transparent 1px,
+        transparent 3px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(20, 17, 15, 0.012) 0px,
+        rgba(20, 17, 15, 0.012) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+  }
+
+  ::selection {
+    background: var(--color-ink);
+    color: var(--color-paper);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility font-display {
+  font-family: var(--font-serif), ui-serif, Georgia, serif;
+  letter-spacing: var(--tracking-display);
+  font-feature-settings: "ss01", "kern";
+}
+
+@utility font-mono-cap {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+/* The slow drift used by the hero canvas + drifting timeline marks.  */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+@keyframes ink-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@utility animate-ink-rise {
+  animation: ink-rise 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@utility animate-drift {
+  animation: drift 9s ease-in-out infinite;
 }
