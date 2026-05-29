@@ -8,6 +8,7 @@ const items = [
   { href: "#trajectory", label: "Trajectory", num: "02" },
   { href: "#writing", label: "Writing", num: "03" },
   { href: "#conversation", label: "Conversation", num: "04" },
+  { href: "#correspondence", label: "Correspondence", num: "05" },
 ];
 
 export default function Nav() {
@@ -23,9 +24,9 @@ export default function Nav() {
     };
   }, [open]);
 
-  // Close on resize past the lg breakpoint, in case the drawer was open.
+  // Close on resize past the xl breakpoint, in case the drawer was open.
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
+    const mq = window.matchMedia("(min-width: 1280px)");
     const handler = (e: MediaQueryListEvent) => {
       if (e.matches) setOpen(false);
     };
@@ -60,8 +61,8 @@ export default function Nav() {
           </span>
         </Link>
 
-        {/* Desktop links — only visible at lg and up so tablets aren't cramped. */}
-        <ul className="hidden items-center gap-6 lg:flex xl:gap-8">
+        {/* Desktop links — only visible at xl and up so the 5-item rail isn't cramped. */}
+        <ul className="hidden items-center gap-6 xl:flex 2xl:gap-8">
           {items.map((it) => (
             <li key={it.href}>
               <Link
@@ -90,14 +91,14 @@ export default function Nav() {
             </span>
           </Link>
 
-          {/* Hamburger — visible below lg. */}
+          {/* Hamburger — visible below xl. */}
           <button
             type="button"
             aria-expanded={open}
             aria-controls="mobile-nav-drawer"
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((o) => !o)}
-            className="relative grid h-11 w-11 place-items-center rounded-full border border-ink/80 text-ink transition-colors hover:bg-ink hover:text-paper lg:hidden"
+            className="relative grid h-11 w-11 place-items-center rounded-full border border-ink/80 text-ink transition-colors hover:bg-ink hover:text-paper xl:hidden"
           >
             <span className="sr-only">Menu</span>
             <span aria-hidden className="relative block h-3.5 w-5">
@@ -125,7 +126,7 @@ export default function Nav() {
       <div
         id="mobile-nav-drawer"
         aria-hidden={!open}
-        className={`lg:hidden ${
+        className={`xl:hidden ${
           open ? "pointer-events-auto" : "pointer-events-none"
         }`}
       >
