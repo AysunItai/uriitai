@@ -79,6 +79,17 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-rule pt-6 font-mono-cap text-muted sm:mt-16 md:flex-row md:items-center">
           <span>© {year} Uri Itai · all rights reserved</span>
+          <span className="text-left md:text-center">
+            Engineered by{" "}
+            <a
+              href="https://www.itaiwebsolutions.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="text-ink underline decoration-rule decoration-1 underline-offset-[0.25em] transition-colors hover:text-accent hover:decoration-accent/60"
+            >
+              ITAI Web Solutions
+            </a>
+          </span>
           <span className="text-left md:text-right">
             Built in Tel Aviv · קוד&nbsp;ומתמטיקה
           </span>
