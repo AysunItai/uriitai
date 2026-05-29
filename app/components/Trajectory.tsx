@@ -121,10 +121,10 @@ export default function Trajectory() {
     <section
       id="trajectory"
       aria-labelledby="trajectory-heading"
-      className="relative border-b border-rule/60"
+      className="relative scroll-mt-24 border-b border-rule/60"
     >
-      <div className="mx-auto max-w-[1400px] px-6 py-24 md:px-10 md:py-32">
-        <div className="grid grid-cols-12 gap-6">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 sm:px-6 sm:py-24 md:px-10 md:py-32">
+        <div className="grid grid-cols-12 gap-x-6 gap-y-6">
           <div className="col-span-12 md:col-span-2">
             <SectionLabel number="02" title="Trajectory" />
           </div>
@@ -132,12 +132,12 @@ export default function Trajectory() {
           <div className="col-span-12 md:col-span-10">
             <h2
               id="trajectory-heading"
-              className="max-w-[16ch] font-display text-[clamp(2.4rem,5.2vw,4.6rem)] leading-[0.98] text-ink"
+              className="max-w-[16ch] font-display text-[clamp(2rem,5.2vw,4.6rem)] leading-[0.98] text-ink"
             >
               A career, refined level&nbsp;by&nbsp;level.
             </h2>
-            <p className="mt-6 max-w-prose text-ink-soft md:text-lg">
-              Each stop is a control point. The line at left is a four-point
+            <p className="mt-5 max-w-prose text-base text-ink-soft sm:mt-6 sm:text-lg">
+              Each stop is a control point. The line is a four-point
               subdivision curve drawn through them — hover any stop to see
               the&nbsp;curve pull toward&nbsp;it.
             </p>
@@ -146,7 +146,7 @@ export default function Trajectory() {
 
         <div
           ref={wrapRef}
-          className="relative mt-16 grid grid-cols-12 gap-6 md:mt-24"
+          className="relative mt-12 grid grid-cols-12 gap-6 sm:mt-16 md:mt-24"
           onMouseLeave={() => setActive(null)}
         >
           <CurveRail count={STOPS.length} pull={pull} />
@@ -158,7 +158,7 @@ export default function Trajectory() {
                 data-stop={i}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
-                className={`group relative grid grid-cols-12 items-baseline gap-4 border-t border-rule py-7 transition-colors ${
+                className={`group relative grid grid-cols-12 items-baseline gap-x-4 gap-y-1 border-t border-rule py-5 transition-colors sm:py-6 md:py-7 ${
                   active === i ? "text-ink" : "text-ink-soft"
                 }`}
               >
@@ -168,16 +168,19 @@ export default function Trajectory() {
                     active === i ? "w-24 opacity-100" : "w-0 opacity-0"
                   }`}
                 />
-                <span className="col-span-12 font-mono-cap text-muted md:col-span-2">
+                <span className="col-span-5 font-mono-cap text-muted sm:col-span-4 md:col-span-2">
                   {s.year}
                 </span>
-                <span className="col-span-12 font-display text-2xl text-ink md:col-span-4 md:text-3xl">
+                <span className="col-span-7 text-right font-mono-cap text-muted sm:col-span-8 sm:text-left md:hidden">
+                  {s.note ?? ""}
+                </span>
+                <span className="col-span-12 font-display text-2xl text-ink sm:text-3xl md:col-span-4 md:text-3xl">
                   {s.org}
                 </span>
-                <span className="col-span-12 md:col-span-3 md:text-lg">
+                <span className="col-span-12 text-base sm:text-lg md:col-span-3 md:text-lg">
                   {s.role}
                 </span>
-                <span className="col-span-12 font-mono-cap text-muted md:col-span-3 md:text-right">
+                <span className="col-span-12 hidden font-mono-cap text-muted md:col-span-3 md:block md:text-right">
                   {s.note ?? ""}
                 </span>
               </li>

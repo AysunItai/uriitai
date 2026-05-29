@@ -40,12 +40,12 @@ npm run build && npm run start
 
 ## What to update
 
-| Where                                | Replace with                                              |
-|--------------------------------------|-----------------------------------------------------------|
-| `Portrait()` in `app/components/About.tsx` | A real photograph of Uri (`<Image src="/portrait.jpg" … />`). |
-| `NEXT_PUBLIC_CALENDLY_URL` env var   | A real Calendly URL. The placeholder card auto-replaces with the embedded calendar when this is set. |
-| `hello@uriitai.com` (Conversation, Footer) | Real address.                                             |
-| Essay items in `app/components/Writing.tsx` | Real Medium URLs / titles.                            |
+| Where                                       | Status                                                                |
+|---------------------------------------------|-----------------------------------------------------------------------|
+| `Portrait()` in `app/components/About.tsx`  | Generative SVG placeholder — swap for a real photograph when ready.   |
+| Calendly URL                                | ✅ Wired to <https://calendly.com/aysun-itai/uri-itai>. Override via `NEXT_PUBLIC_CALENDLY_URL` if it changes. |
+| Email                                       | ✅ `hello@uriitai.com` (Conversation + Footer).                       |
+| Essay items in `app/components/Writing.tsx` | Real Medium URLs / titles when the canonical posts are picked.        |
 
 ## Design notes
 

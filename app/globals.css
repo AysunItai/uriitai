@@ -23,9 +23,12 @@
     /* Light-only by default — this is a printed-paper feel.  */
     color-scheme: light;
     scroll-behavior: smooth;
+    /* Ensures no rogue children can break out and create horizontal scroll. */
+    overflow-x: clip;
   }
 
   body {
+    overflow-x: clip;
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;

@@ -2,11 +2,11 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="relative border-t border-rule/60 bg-paper">
-      <div className="mx-auto max-w-[1400px] px-6 py-16 md:px-10 md:py-24">
-        <div className="grid grid-cols-12 gap-6">
+      <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-6 sm:py-16 md:px-10 md:py-24">
+        <div className="grid grid-cols-12 gap-x-6 gap-y-10">
           <div className="col-span-12 md:col-span-6">
             <p className="font-mono-cap text-muted">Colophon</p>
-            <p className="mt-6 max-w-prose font-display text-3xl leading-tight text-ink md:text-5xl">
+            <p className="mt-5 max-w-prose font-display text-2xl leading-tight text-ink sm:mt-6 sm:text-3xl md:text-5xl">
               Set in Instrument&nbsp;Serif and Inter. Drawn live with a
               <span className="italic text-accent"> 4-point interpolatory </span>
               subdivision scheme.
@@ -14,7 +14,7 @@ export default function Footer() {
           </div>
           <div className="col-span-6 md:col-span-3 md:col-start-9">
             <p className="font-mono-cap text-muted">Index</p>
-            <ul className="mt-6 space-y-2">
+            <ul className="mt-5 space-y-2 sm:mt-6">
               <li>
                 <a className="hover:text-accent" href="#about">
                   § 01 · About
@@ -39,7 +39,7 @@ export default function Footer() {
           </div>
           <div className="col-span-6 md:col-span-3">
             <p className="font-mono-cap text-muted">Elsewhere</p>
-            <ul className="mt-6 space-y-2">
+            <ul className="mt-5 space-y-2 sm:mt-6">
               <li>
                 <a
                   className="hover:text-accent"
@@ -62,7 +62,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="hover:text-accent"
+                  className="break-all hover:text-accent"
                   href="mailto:hello@uriitai.com"
                 >
                   hello@uriitai.com
@@ -72,9 +72,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-rule pt-6 font-mono-cap text-muted md:flex-row md:items-center">
+        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-rule pt-6 font-mono-cap text-muted sm:mt-16 md:flex-row md:items-center">
           <span>© {year} Uri Itai · all rights reserved</span>
-          <span className="text-right">
+          <span className="text-left md:text-right">
             Built in Tel Aviv · קוד&nbsp;ומתמטיקה
           </span>
         </div>

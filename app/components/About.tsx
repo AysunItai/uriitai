@@ -5,15 +5,15 @@ export default function About() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="relative border-b border-rule/60 bg-paper-deep/40"
+      className="relative scroll-mt-24 border-b border-rule/60 bg-paper-deep/40"
     >
-      <div className="mx-auto max-w-[1400px] px-6 py-24 md:px-10 md:py-32">
-        <div className="grid grid-cols-12 gap-6 md:gap-10">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 sm:px-6 sm:py-24 md:px-10 md:py-32">
+        <div className="grid grid-cols-12 gap-x-6 gap-y-10 md:gap-10">
           <div className="col-span-12 md:col-span-2">
             <SectionLabel number="01" title="About" />
           </div>
 
-          <div className="col-span-12 md:col-span-5">
+          <div className="col-span-12 mx-auto w-full max-w-sm sm:max-w-md md:col-span-5 md:max-w-none">
             <Portrait />
             <figcaption className="mt-3 font-mono-cap text-muted">
               fig.&nbsp;02 — portrait, replace&nbsp;with photograph
@@ -23,14 +23,14 @@ export default function About() {
           <div className="col-span-12 md:col-span-5">
             <h2
               id="about-heading"
-              className="max-w-[14ch] font-display text-[clamp(2.4rem,5.2vw,4.4rem)] leading-[0.98] text-ink"
+              className="max-w-[14ch] font-display text-[clamp(2rem,5.2vw,4.4rem)] leading-[0.98] text-ink"
             >
               Between the{" "}
               <span className="italic text-accent">blackboard</span>{" "}
               and the&nbsp;terminal.
             </h2>
 
-            <div className="mt-8 space-y-5 text-lg leading-relaxed text-ink-soft">
+            <div className="mt-6 space-y-5 text-base leading-relaxed text-ink-soft sm:mt-8 sm:text-lg">
               <p>
                 I hold a&nbsp;Ph.D. in Applied Mathematics from the Technion,
                 where my dissertation introduced two generalisations of linear
@@ -55,7 +55,7 @@ export default function About() {
               </p>
             </div>
 
-            <ul className="mt-10 grid grid-cols-2 gap-y-3 font-mono-cap text-muted">
+            <ul className="mt-8 grid grid-cols-2 gap-y-3 font-mono-cap text-muted sm:mt-10">
               <li>· Python</li>
               <li>· Statistical research</li>
               <li>· Deep learning</li>

@@ -6,13 +6,13 @@ export default function Manifesto() {
       aria-label="Manifesto"
       className="relative border-b border-rule/60"
     >
-      <div className="mx-auto max-w-[1400px] px-6 py-28 md:px-10 md:py-40">
-        <div className="grid grid-cols-12 gap-6">
+      <div className="mx-auto max-w-[1400px] px-5 py-20 sm:px-6 sm:py-28 md:px-10 md:py-40">
+        <div className="grid grid-cols-12 gap-x-6 gap-y-6">
           <div className="col-span-12 md:col-span-2">
             <SectionLabel number="A" title="Premise" />
           </div>
 
-          <blockquote className="col-span-12 max-w-[18ch] font-display text-[clamp(2.2rem,6vw,5.5rem)] leading-[1.04] text-ink md:col-span-10">
+          <blockquote className="col-span-12 max-w-[18ch] font-display text-[clamp(2rem,6vw,5.5rem)] leading-[1.04] text-ink md:col-span-10">
             <span className="text-accent">“</span>
             From mathematical principles
             <span className="italic"> to effective programming </span>
@@ -20,8 +20,8 @@ export default function Manifesto() {
             <span className="text-accent">.”</span>
           </blockquote>
 
-          <div className="col-span-12 mt-10 md:col-span-10 md:col-start-3">
-            <p className="max-w-prose text-lg leading-relaxed text-ink-soft md:text-xl">
+          <div className="col-span-12 mt-6 md:col-span-10 md:col-start-3 md:mt-10">
+            <p className="max-w-prose text-base leading-relaxed text-ink-soft sm:text-lg md:text-xl">
               Most software is built on top of mathematics it never names.
               I&nbsp;work the other direction — beginning with the geometry,
               the inequality, the proof, then asking what useful behaviour
@@ -29,7 +29,7 @@ export default function Manifesto() {
               and&nbsp;harder to&nbsp;break.
             </p>
 
-            <ul className="mt-12 grid grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-3">
+            <ul className="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 sm:mt-12 md:grid-cols-3">
               <Pillar
                 k="01"
                 t="Theory"
@@ -59,7 +59,7 @@ function Pillar({ k, t, d }: { k: string; t: string; d: string }) {
       <div className="mb-3 flex items-baseline justify-between font-mono-cap text-muted">
         <span>·&nbsp;{k}</span>
       </div>
-      <h3 className="font-display text-3xl text-ink">{t}</h3>
+      <h3 className="font-display text-2xl text-ink sm:text-3xl">{t}</h3>
       <p className="mt-3 text-ink-soft">{d}</p>
     </li>
   );
