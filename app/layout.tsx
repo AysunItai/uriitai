@@ -170,6 +170,11 @@ const personJsonLd = {
   jobTitle: "Senior Data Scientist · Mathematician",
   description: DESCRIPTION,
   email: "mailto:hello@uriitai.com",
+  // E.164 international format. Same number that backs the floating
+  // WhatsApp button (`app/components/WhatsAppFab.tsx`); listing it in
+  // structured data lets Google's Knowledge Panel surface a "Call"
+  // action alongside the bio.
+  telephone: "+972522633810",
   knowsLanguage: ["en", "he"],
   alumniOf: [
     {

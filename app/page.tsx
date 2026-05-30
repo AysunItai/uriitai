@@ -6,6 +6,7 @@ import Hero from "./components/Hero";
 import Manifesto from "./components/Manifesto";
 import Nav from "./components/Nav";
 import Trajectory from "./components/Trajectory";
+import WhatsAppFab from "./components/WhatsAppFab";
 import Writing from "./components/Writing";
 
 export default function Page() {
@@ -22,6 +23,7 @@ export default function Page() {
         <Correspondence />
       </main>
       <Footer />
+      <WhatsAppFab />
     </>
   );
 }
