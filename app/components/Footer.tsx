@@ -3,7 +3,7 @@ export default function Footer() {
   return (
     <footer className="relative border-t border-rule/60 bg-paper">
       <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-6 sm:py-16 md:px-10 md:py-24">
-        <div className="grid grid-cols-12 gap-x-6 gap-y-10">
+        <div className="grid grid-cols-12 gap-x-3 gap-y-10 sm:gap-x-6">
           <div className="col-span-12 md:col-span-6">
             <p className="font-mono-cap text-muted">Colophon</p>
             <p className="mt-5 max-w-prose font-display text-2xl leading-tight text-ink sm:mt-6 sm:text-3xl md:text-5xl">

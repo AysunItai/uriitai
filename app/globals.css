@@ -25,6 +25,12 @@
     scroll-behavior: smooth;
     /* Ensures no rogue children can break out and create horizontal scroll. */
     overflow-x: clip;
+    /* Prevents Samsung Internet / Chrome Android from auto-zooming the
+       text when the device is rotated. Combined with the viewport
+       meta tag in layout.tsx, this gives consistent type sizing
+       across iOS Safari, Samsung Internet, and Chrome Android. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
@@ -32,6 +38,10 @@
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    /* Samsung Internet honours `overscroll-behavior` — keeps the
+       address-bar pull-to-refresh from triggering when the user
+       scrolls up past the hero. */
+    overscroll-behavior-y: none;
     background:
       radial-gradient(
         1200px 800px at 15% -10%,
@@ -44,6 +54,17 @@
         transparent 60%
       ),
       var(--color-paper);
+  }
+
+  /* Form inputs default to ≥16px font-size. iOS Safari and Samsung
+     Internet auto-zoom the viewport when an input < 16px is focused —
+     visually jarring. Our actual inputs use larger Tailwind text
+     utilities which override this; this is a safety net for any
+     future field that forgets to set a size. */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
   }
 
   /* Subtle paper grain — a CSS-only fiber texture, no image needed.  */

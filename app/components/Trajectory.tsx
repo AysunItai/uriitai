@@ -124,7 +124,7 @@ export default function Trajectory() {
       className="relative scroll-mt-24 border-b border-rule/60"
     >
       <div className="mx-auto max-w-[1400px] px-5 py-16 sm:px-6 sm:py-24 md:px-10 md:py-32">
-        <div className="grid grid-cols-12 gap-x-6 gap-y-6">
+        <div className="grid grid-cols-12 gap-x-3 gap-y-6 sm:gap-x-6">
           <div className="col-span-12 md:col-span-2">
             <SectionLabel number="02" title="Trajectory" />
           </div>
@@ -146,7 +146,7 @@ export default function Trajectory() {
 
         <div
           ref={wrapRef}
-          className="relative mt-12 grid grid-cols-12 gap-6 sm:mt-16 md:mt-24"
+          className="relative mt-12 grid grid-cols-12 gap-3 sm:mt-16 sm:gap-6 md:mt-24"
           onMouseLeave={() => setActive(null)}
         >
           <CurveRail count={STOPS.length} pull={pull} />
@@ -158,7 +158,7 @@ export default function Trajectory() {
                 data-stop={i}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
-                className={`group relative grid grid-cols-12 items-baseline gap-x-4 gap-y-1 border-t border-rule py-5 transition-colors sm:py-6 md:py-7 ${
+                className={`group relative border-t border-rule py-5 transition-colors sm:py-6 md:py-7 ${
                   active === i ? "text-ink" : "text-ink-soft"
                 }`}
               >
@@ -168,21 +168,38 @@ export default function Trajectory() {
                     active === i ? "w-24 opacity-100" : "w-0 opacity-0"
                   }`}
                 />
-                <span className="col-span-5 font-mono-cap text-muted sm:col-span-4 md:col-span-2">
-                  {s.year}
-                </span>
-                <span className="col-span-7 text-right font-mono-cap text-muted sm:col-span-8 sm:text-left md:hidden">
-                  {s.note ?? ""}
-                </span>
-                <span className="col-span-12 font-display text-2xl text-ink sm:text-3xl md:col-span-4 md:text-3xl">
-                  {s.org}
-                </span>
-                <span className="col-span-12 text-base sm:text-lg md:col-span-3 md:text-lg">
-                  {s.role}
-                </span>
-                <span className="col-span-12 hidden font-mono-cap text-muted md:col-span-3 md:block md:text-right">
-                  {s.note ?? ""}
-                </span>
+
+                {/* Phone layout: stack year on its own line above the
+                    org/role, with the optional location note as a
+                    small caption below role. Avoids the cramped
+                    side-by-side year+note we had before, which broke
+                    onto two lines on Galaxy S-class screens. */}
+                <div className="flex flex-col gap-1 md:hidden">
+                  <span className="font-mono-cap text-muted">{s.year}</span>
+                  <span className="font-display text-2xl text-ink sm:text-3xl">
+                    {s.org}
+                  </span>
+                  <span className="text-base sm:text-lg">{s.role}</span>
+                  {s.note ? (
+                    <span className="mt-1 font-mono-cap text-muted">
+                      {s.note}
+                    </span>
+                  ) : null}
+                </div>
+
+                {/* Tablet/desktop layout: the original 4-column rail. */}
+                <div className="hidden grid-cols-12 items-baseline gap-x-4 gap-y-1 md:grid">
+                  <span className="col-span-2 font-mono-cap text-muted">
+                    {s.year}
+                  </span>
+                  <span className="col-span-4 font-display text-3xl text-ink">
+                    {s.org}
+                  </span>
+                  <span className="col-span-3 text-lg">{s.role}</span>
+                  <span className="col-span-3 text-right font-mono-cap text-muted">
+                    {s.note ?? ""}
+                  </span>
+                </div>
               </li>
             ))}
           </ol>

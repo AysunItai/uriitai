@@ -72,6 +72,8 @@ export default function WhatsAppFab() {
       // drawer backdrop (z-30) and panel (z-50), so the drawer reads
       // as a clean overlay when it opens. The pair of focus styles
       // (offset + accent ring) keeps keyboard users oriented.
+      // `touch-action: manipulation` removes the legacy 300ms tap
+      // delay on Samsung Internet and old Android Chromium builds.
       className={`group fixed bottom-5 right-5 z-20 flex items-center gap-3 rounded-full bg-paper py-3 pl-3 pr-4 shadow-[0_8px_24px_-8px_rgba(20,17,15,0.35)] ring-1 ring-rule/70 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_-10px_rgba(20,17,15,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:bottom-7 sm:right-7 ${
         hidden
           ? "pointer-events-none translate-y-3 opacity-0"
@@ -79,8 +81,10 @@ export default function WhatsAppFab() {
       }`}
       style={{
         // Honour iOS safe-area so the button doesn't sit under the
-        // home indicator in landscape on a notched device.
+        // home indicator in landscape on a notched device, and
+        // Samsung's gesture-bar safe area on Android 12+.
         marginBottom: "env(safe-area-inset-bottom, 0)",
+        touchAction: "manipulation",
       }}
     >
       {/* The brand glyph. Drawn inline (rather than imported as an SVG

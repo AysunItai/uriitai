@@ -12,7 +12,7 @@ export default function Hero() {
       </div>
 
       <div className="mx-auto max-w-[1400px] px-5 pt-14 pb-20 sm:px-6 sm:pt-20 sm:pb-24 md:px-10 md:pt-28 md:pb-40">
-        <div className="grid grid-cols-12 gap-x-6 gap-y-4">
+        <div className="grid grid-cols-12 gap-x-3 gap-y-4 sm:gap-x-6">
           <div className="col-span-12 md:col-span-2">
             <p className="font-mono-cap text-muted">
               <span className="text-accent">§&nbsp;00</span>
@@ -24,7 +24,20 @@ export default function Hero() {
 
           <div className="col-span-12 md:col-span-10">
             <p className="animate-ink-rise font-mono-cap text-muted [animation-delay:0.05s]">
-              Senior Data Scientist · Mathematician · Tel&nbsp;Aviv ↔ Guangdong
+              {/* The whole subtitle reads better on phones when it
+                  breaks at the natural separators (· dots) instead of
+                  mid-phrase. We split into spans so each chunk wraps as
+                  a unit, and the line-height is bumped slightly so the
+                  three-line wrap on a 360px screen breathes. */}
+              <span className="inline-block leading-relaxed">
+                Senior Data Scientist
+              </span>
+              <span aria-hidden className="mx-2 text-rule">·</span>
+              <span className="inline-block leading-relaxed">Mathematician</span>
+              <span aria-hidden className="mx-2 text-rule">·</span>
+              <span className="inline-block leading-relaxed">
+                Tel&nbsp;Aviv ↔ Guangdong
+              </span>
             </p>
 
             <h1 className="mt-6 max-w-[14ch] animate-ink-rise font-display text-[clamp(3rem,11vw,11rem)] leading-[0.92] text-ink sm:mt-8 [animation-delay:0.15s]">

@@ -102,14 +102,18 @@ export default function Nav() {
               </span>
             </Link>
 
-            {/* Hamburger — visible below xl. */}
+              {/* Hamburger — visible below xl. h-12 (48px) on mobile to
+                meet Samsung One UI / Material 3 guidelines for tap
+                targets; tightens to h-11 on sm+ where the bar gets
+                more vertical room. */}
             <button
               type="button"
               aria-expanded={open}
               aria-controls="mobile-nav-drawer"
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((o) => !o)}
-              className="relative grid h-11 w-11 place-items-center rounded-full border border-ink/80 text-ink transition-colors hover:bg-ink hover:text-paper xl:hidden"
+              className="relative grid h-12 w-12 place-items-center rounded-full border border-ink/80 text-ink transition-colors hover:bg-ink hover:text-paper sm:h-11 sm:w-11 xl:hidden"
+              style={{ touchAction: "manipulation" }}
             >
               <span className="sr-only">Menu</span>
               <span aria-hidden className="relative block h-3.5 w-5">
@@ -155,11 +159,13 @@ export default function Nav() {
           }`}
         />
 
-        {/* Panel — top values match the rendered nav height (44px hamburger
-            + py-3 = 68px on mobile, py-4 = 76px on sm+) so it sits flush
-            below the bar at every breakpoint. */}
+        {/* Panel — top values match the rendered nav height. With the
+            48px hamburger + py-3 on mobile, the bar is 72px; with the
+            44px hamburger + py-4 on sm+, it's 76px. Setting the panel
+            flush below those keeps the drawer visually anchored to the
+            bar at every breakpoint. */}
         <div
-          className={`fixed inset-x-0 top-[68px] z-50 origin-top border-b border-rule bg-paper transition-[transform,opacity] duration-300 ease-out sm:top-[76px] ${
+          className={`fixed inset-x-0 top-[72px] z-50 origin-top border-b border-rule bg-paper transition-[transform,opacity] duration-300 ease-out sm:top-[76px] ${
             open
               ? "translate-y-0 opacity-100"
               : "pointer-events-none -translate-y-3 opacity-0"

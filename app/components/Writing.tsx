@@ -43,7 +43,7 @@ export default function Writing() {
       className="relative scroll-mt-24 border-b border-rule/60 bg-paper-deep/40"
     >
       <div className="mx-auto max-w-[1400px] px-5 py-16 sm:px-6 sm:py-24 md:px-10 md:py-32">
-        <div className="grid grid-cols-12 gap-x-6 gap-y-6">
+        <div className="grid grid-cols-12 gap-x-3 gap-y-6 sm:gap-x-6">
           <div className="col-span-12 md:col-span-2">
             <SectionLabel number="03" title="Writing" />
           </div>
@@ -64,7 +64,7 @@ export default function Writing() {
           </div>
         </div>
 
-        <div className="mt-12 grid grid-cols-12 gap-x-6 gap-y-12 sm:mt-16 md:gap-10">
+        <div className="mt-12 grid grid-cols-12 gap-x-3 gap-y-12 sm:mt-16 sm:gap-x-6 md:gap-10">
           <div className="col-span-12 md:col-span-6">
             <h3 className="mb-5 font-mono-cap text-muted sm:mb-6">
               Essays · medium.com/@uriitai

@@ -7,7 +7,7 @@ export default function Manifesto() {
       className="relative border-b border-rule/60"
     >
       <div className="mx-auto max-w-[1400px] px-5 py-20 sm:px-6 sm:py-28 md:px-10 md:py-40">
-        <div className="grid grid-cols-12 gap-x-6 gap-y-6">
+        <div className="grid grid-cols-12 gap-x-3 gap-y-6 sm:gap-x-6">
           <div className="col-span-12 md:col-span-2">
             <SectionLabel number="A" title="Premise" />
           </div>

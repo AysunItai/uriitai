@@ -54,6 +54,13 @@ export default function HeroCanvas() {
     let width = 0;
     let height = 0;
 
+    // Whether the canvas is currently in (or near) the viewport. We
+    // pause the animation loop when it scrolls out of view — saves a
+    // lot of battery on Samsung Galaxy / mid-range Android, where the
+    // GPU can otherwise burn cycles repainting an off-screen canvas
+    // for the entire scroll session.
+    let inView = true;
+
     const pointer = { x: 0.5, y: 0.5, active: 0 };
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -137,6 +144,14 @@ export default function HeroCanvas() {
 
     function frame(now: number) {
       if (!ctx) return;
+      // Skip the actual render when the canvas isn't in view. We still
+      // continue the rAF chain so that becoming-visible can resume
+      // smoothly, but we avoid the repaint cost — the dominant
+      // expense on low/mid-range Android.
+      if (!inView) {
+        raf = requestAnimationFrame(frame);
+        return;
+      }
       const t = reduceMotion ? 0 : now - t0;
 
       ctx.clearRect(0, 0, width, height);
@@ -203,12 +218,33 @@ export default function HeroCanvas() {
 
     resize();
     raf = requestAnimationFrame(frame);
+
+    // IntersectionObserver lets us pause the rAF loop when the hero
+    // scrolls out of the viewport. rootMargin "200px" keeps the curve
+    // running for a moment after it leaves view so that scrolling
+    // *back* doesn't reveal a frozen frame.
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        const becameVisible = entry.isIntersecting && !inView;
+        inView = entry.isIntersecting;
+        if (becameVisible) {
+          // Reset the time origin so the curve doesn't jump forward
+          // by however many seconds we paused for.
+          t0 = performance.now();
+          raf = requestAnimationFrame(frame);
+        }
+      },
+      { rootMargin: "200px" },
+    );
+    io.observe(canvas);
+
     window.addEventListener("resize", resize);
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerleave", onLeave);
 
     return () => {
       cancelAnimationFrame(raf);
+      io.disconnect();
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerleave", onLeave);

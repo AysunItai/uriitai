@@ -68,7 +68,7 @@ export default function Correspondence() {
       <Backdrop />
 
       <div className="relative mx-auto max-w-[1400px] px-5 py-16 sm:px-6 sm:py-24 md:px-10 md:py-32">
-        <div className="grid grid-cols-12 gap-x-6 gap-y-8 md:gap-y-10">
+        <div className="grid grid-cols-12 gap-x-3 gap-y-8 sm:gap-x-6 md:gap-y-10">
           <div className="col-span-12 md:col-span-2">
             <SectionLabel number="05" title="Correspondence" />
           </div>
@@ -255,6 +255,11 @@ function Field({
  * viewport, like John Nash's window in Princeton. Positions are derived
  * from a deterministic hash of the index, so SSR and CSR agree exactly
  * (no hydration mismatch).
+ *
+ * On phones we render a smaller subset (the first 8 tokens). 18 absolutely
+ * positioned <text> nodes cause noticeable repaint cost on mid-range
+ * Android — and at narrow widths most of them clip awkwardly into the
+ * form anyway.
  */
 function Backdrop() {
   const tokens = [
@@ -279,9 +284,26 @@ function Backdrop() {
   ];
 
   return (
+    <>
+      {/* Phones get a sparser, calmer backdrop — fewer overflow
+          artefacts, fewer SVG nodes to repaint, more readable form. */}
+      <BackdropSvg tokens={tokens.slice(0, 8)} className="sm:hidden" />
+      <BackdropSvg tokens={tokens} className="hidden sm:block" />
+    </>
+  );
+}
+
+function BackdropSvg({
+  tokens,
+  className,
+}: {
+  tokens: string[];
+  className?: string;
+}) {
+  return (
     <svg
       aria-hidden
-      className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.07]"
+      className={`pointer-events-none absolute inset-0 h-full w-full opacity-[0.07] ${className ?? ""}`}
       viewBox="0 0 1000 800"
       preserveAspectRatio="xMidYMid slice"
     >
