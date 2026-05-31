@@ -6,8 +6,11 @@ export default function Hero() {
       aria-label="Introduction"
       className="relative isolate overflow-hidden border-b border-rule/60"
     >
-      {/* Live mathematical artwork — the hero IS Uri's Ph.D. subject. */}
-      <div className="absolute inset-0 -z-10">
+      {/* Live mathematical artwork — the hero IS Uri's Ph.D. subject.
+          On phones the curve is dropped to 60% opacity so it sits more
+          softly behind the headline + paragraph; desktop keeps the
+          full-strength rendering it was designed for. */}
+      <div className="absolute inset-0 -z-10 opacity-60 md:opacity-100">
         <HeroCanvas />
       </div>
 
@@ -40,19 +43,24 @@ export default function Hero() {
               </span>
             </p>
 
-            <h1 className="mt-6 max-w-[14ch] animate-ink-rise font-display text-[clamp(3rem,11vw,11rem)] leading-[0.92] text-ink sm:mt-8 [animation-delay:0.15s]">
+            <h1 className="mt-6 max-w-[14ch] animate-ink-rise font-display text-[clamp(2.5rem,11vw,11rem)] leading-[0.92] text-ink sm:mt-8 [animation-delay:0.15s]">
               A mathematician,
               <span className="block italic text-accent">at work.</span>
             </h1>
 
             <div className="mt-10 grid grid-cols-1 gap-10 sm:mt-12 md:mt-16 md:grid-cols-12 md:gap-12">
-              <p className="col-span-1 max-w-prose animate-ink-rise text-base leading-relaxed text-ink-soft sm:text-lg md:col-span-7 md:text-xl [animation-delay:0.35s]">
+              <p className="col-span-1 max-w-prose animate-ink-rise text-base leading-[1.7] text-ink-soft sm:text-lg sm:leading-relaxed md:col-span-7 md:text-xl [animation-delay:0.35s]">
                 I translate theorems into machines that learn. Two decades
                 between a&nbsp;blackboard and&nbsp;a terminal — refinement
                 schemes, geometric neural networks, anomaly detection,
                 trustworthy&nbsp;AI. The curve above is a four-point
                 interpolatory subdivision scheme — the&nbsp;subject of my
-                doctorate, redrawn live each frame. Move your&nbsp;cursor.
+                doctorate, redrawn live each frame.{" "}
+                {/* Touch and pointer hardware get different copy — phones
+                    have no cursor, so showing "Move your cursor" reads as
+                    a bug. */}
+                <span className="md:hidden">Touch the&nbsp;curve.</span>
+                <span className="hidden md:inline">Move your&nbsp;cursor.</span>
               </p>
 
               <aside className="col-span-1 grid animate-ink-rise grid-cols-2 gap-x-6 gap-y-5 border-t border-rule pt-6 sm:grid-cols-4 md:col-span-4 md:col-start-9 md:grid-cols-1 md:border-l md:border-t-0 md:pl-6 md:pt-0 [animation-delay:0.55s]">
