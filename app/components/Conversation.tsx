@@ -5,7 +5,7 @@ import SectionLabel from "./SectionLabel";
 // iframe working in any deployment, with or without env config.
 const CALENDLY_URL =
   process.env.NEXT_PUBLIC_CALENDLY_URL ??
-  "https://calendly.com/aysun-itai/uri-itai";
+  "https://calendly.com/uri-itai/30min";
 
 export default function Conversation() {
   return (
@@ -31,7 +31,7 @@ export default function Conversation() {
             <p className="mt-5 max-w-prose text-base text-ink-soft sm:mt-6 sm:text-lg">
               I&nbsp;take on a small number of consulting engagements,
               advisory roles, public lectures and graduate-level
-              collaborations each year. Pick a thirty-minute window
+              collaborations each year. Pick a fifteen-minute window
               below — or write directly. I read every message.
             </p>
           </div>

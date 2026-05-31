@@ -32,7 +32,7 @@ npm run build && npm run start
 | Var                       | Purpose                                                                     | Default                  |
 |---------------------------|-----------------------------------------------------------------------------|--------------------------|
 | `NEXT_PUBLIC_SITE_URL`    | Canonical site URL — used by metadata, Open Graph, sitemap, robots, JSON-LD | `https://uriitai.com`    |
-| `NEXT_PUBLIC_CALENDLY_URL`| Calendly booking URL embedded in `§ 04 · Conversation`                      | `https://calendly.com/aysun-itai/uri-itai` |
+| `NEXT_PUBLIC_CALENDLY_URL`| Calendly booking URL embedded in `§ 04 · Conversation`                      | `https://calendly.com/uri-itai/30min` |
 
 Set in production (Vercel / Netlify / wherever) before the first deploy. Both
 need to be `NEXT_PUBLIC_*` because they're read in client components and OG
@@ -85,7 +85,7 @@ indexing.
 | Where                                       | Status                                                                |
 |---------------------------------------------|-----------------------------------------------------------------------|
 | `Portrait()` in `app/components/About.tsx`  | Generative SVG placeholder — swap for a real photograph when ready.   |
-| Calendly URL                                | ✅ Wired to <https://calendly.com/aysun-itai/uri-itai>. Override via `NEXT_PUBLIC_CALENDLY_URL` if it changes. |
+| Calendly URL                                | ✅ Wired to <https://calendly.com/uri-itai/30min>. Override via `NEXT_PUBLIC_CALENDLY_URL` if it changes. |
 | Email                                       | ✅ `hello@uriitai.com` (Conversation + Footer).                       |
 | Essay items in `app/components/Writing.tsx` | Real Medium URLs / titles when the canonical posts are picked.        |
 
