@@ -39,6 +39,12 @@ export default function WhatsAppFab() {
   // through the dimmed backdrop.
   const [drawerOpen, setDrawerOpen] = useState(false);
 
+  // The Correspondence form has its own "Send dispatch" button in the
+  // bottom-right corner of the section — exactly where the FAB lives.
+  // We hide the FAB while that section is in view so it never overlaps
+  // the form's own primary action.
+  const [contactInView, setContactInView] = useState(false);
+
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 120);
     onScroll();
@@ -60,7 +66,21 @@ export default function WhatsAppFab() {
     return () => obs.disconnect();
   }, []);
 
-  const hidden = !visible || drawerOpen;
+  useEffect(() => {
+    const contact = document.getElementById("correspondence");
+    if (!contact) return;
+    // Trigger when ~20% of the contact section is in view — early
+    // enough that the FAB clears before the form scrolls into the
+    // bottom-right corner where the FAB would otherwise sit.
+    const obs = new IntersectionObserver(
+      ([entry]) => setContactInView(entry.isIntersecting),
+      { threshold: 0.2 },
+    );
+    obs.observe(contact);
+    return () => obs.disconnect();
+  }, []);
+
+  const hidden = !visible || drawerOpen || contactInView;
 
   return (
     <a
@@ -74,7 +94,10 @@ export default function WhatsAppFab() {
       // (offset + accent ring) keeps keyboard users oriented.
       // `touch-action: manipulation` removes the legacy 300ms tap
       // delay on Samsung Internet and old Android Chromium builds.
-      className={`group fixed bottom-5 right-5 z-20 flex items-center gap-3 rounded-full bg-paper py-3 pl-3 pr-4 shadow-[0_8px_24px_-8px_rgba(20,17,15,0.35)] ring-1 ring-rule/70 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_-10px_rgba(20,17,15,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:bottom-7 sm:right-7 ${
+      // Padding tightens to `p-2` on phones (label is hidden there)
+      // so the FAB collapses to a clean ~52px circle, leaving more
+      // room for content underneath.
+      className={`group fixed bottom-5 right-5 z-20 flex items-center gap-2 rounded-full bg-paper p-2 shadow-[0_8px_24px_-8px_rgba(20,17,15,0.35)] ring-1 ring-rule/70 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_-10px_rgba(20,17,15,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:bottom-7 sm:right-7 sm:gap-3 sm:py-3 sm:pl-3 sm:pr-4 ${
         hidden
           ? "pointer-events-none translate-y-3 opacity-0"
           : "translate-y-0 opacity-100"

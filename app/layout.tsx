@@ -212,7 +212,7 @@ const personJsonLd = {
     "Machine learning",
   ],
   sameAs: [
-    "https://www.linkedin.com/in/uri-itai-43106316/",
+    "https://www.linkedin.com/in/uri-itai-ph-d-46641b97/",
     "https://medium.com/@uriitai",
   ],
 };

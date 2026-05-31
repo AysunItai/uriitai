@@ -14,6 +14,22 @@ export default function Hero() {
         <HeroCanvas />
       </div>
 
+      {/* Mobile-only paper-tinted gradient: dissolves the curve into
+          the page background before it reaches the body paragraph and
+          stats column. The canvas keeps drawing the full subdivision
+          curve underneath — we just stop *showing* it where text lives.
+          Hidden on md+ so the desktop composition is byte-identical.
+
+          Math: the gradient div is h-[75%] anchored to the bottom, so
+          it spans 25–100% of the hero. With full paper hit at 25% of
+          the gradient height, the curve goes fully opaque-to-paper at
+          ~44% of the hero — comfortably above the body paragraph
+          (which starts at ~47–50%) and the stats column below it. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[75%] bg-[linear-gradient(to_bottom,transparent_0%,var(--color-paper)_25%,var(--color-paper)_100%)] md:hidden"
+      />
+
       <div className="mx-auto max-w-[1400px] px-5 pt-14 pb-20 sm:px-6 sm:pt-20 sm:pb-24 md:px-10 md:pt-28 md:pb-40">
         <div className="grid grid-cols-12 gap-x-3 gap-y-4 sm:gap-x-6">
           <div className="col-span-12 md:col-span-2">
@@ -48,7 +64,7 @@ export default function Hero() {
               <span className="block italic text-accent">at work.</span>
             </h1>
 
-            <div className="mt-10 grid grid-cols-1 gap-10 sm:mt-12 md:mt-16 md:grid-cols-12 md:gap-12">
+            <div className="mt-10 grid grid-cols-1 gap-12 sm:mt-12 sm:gap-10 md:mt-16 md:grid-cols-12 md:gap-12">
               <p className="col-span-1 max-w-prose animate-ink-rise text-base leading-[1.7] text-ink-soft sm:text-lg sm:leading-relaxed md:col-span-7 md:text-xl [animation-delay:0.35s]">
                 I translate theorems into machines that learn. Two decades
                 between a&nbsp;blackboard and&nbsp;a terminal — refinement

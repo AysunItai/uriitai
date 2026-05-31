@@ -58,7 +58,7 @@ export default function Footer() {
               <li>
                 <a
                   className="hover:text-accent"
-                  href="https://www.linkedin.com/in/uri-itai-43106316/"
+                  href="https://www.linkedin.com/in/uri-itai-ph-d-46641b97/"
                   target="_blank"
                   rel="noreferrer"
                 >

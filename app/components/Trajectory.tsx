@@ -138,8 +138,15 @@ export default function Trajectory() {
             </h2>
             <p className="mt-5 max-w-prose text-base text-ink-soft sm:mt-6 sm:text-lg">
               Each stop is a control point. The line is a four-point
-              subdivision curve drawn through them — hover any stop to see
-              the&nbsp;curve pull toward&nbsp;it.
+              subdivision curve drawn through them
+              {/* The curve rail is rendered only at md+ (CurveRail is
+                  `hidden md:block`), so the "hover any stop" hint is
+                  meaningless on phones. Keep the sentence intact at
+                  desktop, drop the dependent clause on mobile. */}
+              <span className="hidden md:inline">
+                {" "}— hover any stop to see the&nbsp;curve pull toward&nbsp;it
+              </span>
+              .
             </p>
           </div>
         </div>

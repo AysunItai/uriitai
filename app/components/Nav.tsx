@@ -171,7 +171,12 @@ export default function Nav() {
               : "pointer-events-none -translate-y-3 opacity-0"
           }`}
         >
-          <ul className="mx-auto flex max-w-[1400px] flex-col px-5 py-4 sm:px-6">
+          {/* Slightly tighter top padding (pt-2 vs the original py-4)
+              so the first link sits closer to the nav and the panel
+              doesn't open with an empty band at the top — that was
+              reading as unfinished on Samsung Galaxy. The CTA below
+              keeps its breathing room via the explicit mt-4 + pt-5. */}
+          <ul className="mx-auto flex max-w-[1400px] flex-col px-5 pb-6 pt-2 sm:px-6 sm:pb-8 sm:pt-3">
             {items.map((it, i) => (
               <li
                 key={it.href}
@@ -192,12 +197,14 @@ export default function Nav() {
                 </Link>
               </li>
             ))}
-            <li className="mt-2 border-t border-rule/70 pt-5">
+            {/* CTA spans the full width on mobile so it reads as the
+                terminal action of the menu, not just another link. */}
+            <li className="mt-4 border-t border-rule/70 pt-5">
               <Link
                 href="#conversation"
                 onClick={() => setOpen(false)}
                 tabIndex={open ? 0 : -1}
-                className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 font-mono-cap text-paper"
+                className="flex w-full items-center justify-between gap-2 rounded-full bg-ink px-6 py-4 font-mono-cap text-paper transition-colors hover:bg-accent"
               >
                 Book a conversation
                 <span aria-hidden>→</span>
