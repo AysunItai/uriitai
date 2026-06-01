@@ -84,7 +84,7 @@ indexing.
 
 | Where                                       | Status                                                                |
 |---------------------------------------------|-----------------------------------------------------------------------|
-| `Portrait()` in `app/components/About.tsx`  | Generative SVG placeholder — swap for a real photograph when ready.   |
+| `Portrait()` in `app/components/About.tsx`  | ✅ Real photograph wired (`public/uri.jpg`) — swap the file or update the path to refresh.   |
 | Calendly URL                                | ✅ Wired to <https://calendly.com/uri-itai/30min>. Override via `NEXT_PUBLIC_CALENDLY_URL` if it changes. |
 | Email                                       | ✅ `hello@uriitai.com` (Conversation + Footer).                       |
 | Essay items in `app/components/Writing.tsx` | Real Medium URLs / titles when the canonical posts are picked.        |

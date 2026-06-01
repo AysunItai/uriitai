@@ -1,3 +1,4 @@
+import Image from "next/image";
 import SectionLabel from "./SectionLabel";
 
 export default function About() {
@@ -15,9 +16,6 @@ export default function About() {
 
           <div className="col-span-12 mx-auto w-full max-w-sm sm:max-w-md md:col-span-5 md:max-w-none">
             <Portrait />
-            <figcaption className="mt-3 font-mono-cap text-muted">
-              fig.&nbsp;02 — portrait, replace&nbsp;with photograph
-            </figcaption>
           </div>
 
           <div className="col-span-12 md:col-span-5">
@@ -73,104 +71,86 @@ export default function About() {
 }
 
 /**
- * Portrait placeholder — a generative SVG of nested level-sets and a
- * silhouetted bust. Functions as art rather than waiting for a stock
- * photograph; the user replaces this with a real picture later.
+ * Portrait — Uri's real lecture photograph, framed like a research plate.
+ *
+ * Design notes:
+ * - The image sits at its native ~3:2 ratio so nothing is force-cropped.
+ * - Subtle corner registration ticks + a top crosshair echo the diagram /
+ *   ground-glass vocabulary used elsewhere on the site, without ever
+ *   sitting on top of Uri's face or the slide text.
+ * - A mono-cap data strip below acts as the figcaption, semantically
+ *   correct (it lives inside <figure>) and visually consistent with
+ *   "fig. 0X" labels on the other generative panels.
  */
 function Portrait() {
-  const rings = Array.from({ length: 14 }, (_, i) => i);
   return (
-    <figure className="relative aspect-[4/5] w-full overflow-hidden border border-rule bg-paper">
-      <svg
-        viewBox="0 0 400 500"
-        className="absolute inset-0 h-full w-full"
-        aria-label="Generative portrait placeholder"
-      >
-        <defs>
-          <radialGradient id="halo" cx="50%" cy="38%" r="55%">
-            <stop offset="0%" stopColor="#8b3a1f" stopOpacity="0.18" />
-            <stop offset="60%" stopColor="#8b3a1f" stopOpacity="0.04" />
-            <stop offset="100%" stopColor="#8b3a1f" stopOpacity="0" />
-          </radialGradient>
-          <pattern
-            id="grid"
-            width="20"
-            height="20"
-            patternUnits="userSpaceOnUse"
-          >
-            <path
-              d="M 20 0 L 0 0 0 20"
-              fill="none"
-              stroke="#14110f"
-              strokeOpacity="0.05"
-              strokeWidth="0.5"
-            />
-          </pattern>
-          <clipPath id="bust">
-            <path d="M 200 110 C 252 110 282 152 282 198 C 282 232 264 254 252 268 C 290 284 316 312 332 360 L 332 500 L 68 500 L 68 360 C 84 312 110 284 148 268 C 136 254 118 232 118 198 C 118 152 148 110 200 110 Z" />
-          </clipPath>
-        </defs>
-
-        <rect width="400" height="500" fill="#efeae0" />
-        <rect width="400" height="500" fill="url(#grid)" />
-        <rect width="400" height="500" fill="url(#halo)" />
-
-        {/* Concentric level sets — feels like a contour map of a face. */}
-        <g
-          stroke="#14110f"
-          strokeOpacity="0.35"
-          fill="none"
-          clipPath="url(#bust)"
-        >
-          {rings.map((i) => (
-            <ellipse
-              key={i}
-              cx={200 + Math.sin(i * 0.6) * 6}
-              cy={230 + Math.cos(i * 0.7) * 8}
-              rx={30 + i * 14}
-              ry={40 + i * 16}
-              strokeWidth={0.45 + (i % 3) * 0.15}
-              opacity={0.85 - i * 0.04}
-            />
-          ))}
-        </g>
-
-        {/* Bust outline. */}
-        <path
-          d="M 200 110 C 252 110 282 152 282 198 C 282 232 264 254 252 268 C 290 284 316 312 332 360 L 332 500 L 68 500 L 68 360 C 84 312 110 284 148 268 C 136 254 118 232 118 198 C 118 152 148 110 200 110 Z"
-          fill="none"
-          stroke="#14110f"
-          strokeWidth="1.2"
+    <figure className="relative w-full overflow-hidden border border-rule bg-paper">
+      {/* Photograph at its native aspect ratio (2048×1362 ≈ 3:2). */}
+      <div className="relative aspect-[1024/681] w-full">
+        <Image
+          src="/uri.jpg"
+          alt="Uri Itai on stage delivering a public lecture on fairness, robustness and adversarial examples in machine learning."
+          fill
+          sizes="(min-width: 1024px) 36vw, (min-width: 768px) 42vw, (min-width: 640px) 28rem, 100vw"
+          className="object-cover"
+          quality={85}
         />
 
-        {/* Crosshair, like a research diagram registration mark. */}
-        <g stroke="#8b3a1f" strokeWidth="0.8">
-          <line x1="200" y1="80" x2="200" y2="100" />
-          <line x1="190" y1="90" x2="210" y2="90" />
-        </g>
+        {/* Corner registration ticks — like a research plate / ground glass.
+            Kept paper-coloured so they read on the dark stage backdrop
+            without ever competing with the subject. */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute left-2 top-2 h-3 w-3 border-l border-t border-paper/70"
+        />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute right-2 top-2 h-3 w-3 border-r border-t border-paper/70"
+        />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute bottom-2 left-2 h-3 w-3 border-l border-b border-paper/70"
+        />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute bottom-2 right-2 h-3 w-3 border-r border-b border-paper/70"
+        />
 
-        <text
-          x="20"
-          y="490"
-          fontFamily="ui-monospace, monospace"
-          fontSize="9"
-          letterSpacing="2"
-          fill="#6b6358"
+        {/* Centre-top crosshair, same registration-mark vocabulary as the
+            old placeholder. */}
+        <svg
+          aria-hidden
+          viewBox="0 0 12 12"
+          className="pointer-events-none absolute left-1/2 top-2 h-3 w-3 -translate-x-1/2 text-paper/70"
         >
-          PORTRAIT · placeholder · 4:5
-        </text>
-        <text
-          x="380"
-          y="490"
-          textAnchor="end"
-          fontFamily="ui-monospace, monospace"
-          fontSize="9"
-          letterSpacing="2"
-          fill="#6b6358"
-        >
-          U.&nbsp;ITAI
-        </text>
-      </svg>
+          <line
+            x1="6"
+            y1="0"
+            x2="6"
+            y2="12"
+            stroke="currentColor"
+            strokeWidth="0.6"
+          />
+          <line
+            x1="0"
+            y1="6"
+            x2="12"
+            y2="6"
+            stroke="currentColor"
+            strokeWidth="0.6"
+          />
+        </svg>
+      </div>
+
+      {/* Mono-cap data strip — same "fig. 0X" language used throughout. */}
+      <figcaption className="flex items-center justify-between gap-3 border-t border-rule px-3 py-2 font-mono-cap text-muted">
+        <span className="truncate">
+          fig.&nbsp;02 — U.&nbsp;Itai · in&nbsp;lecture
+        </span>
+        <span aria-hidden className="shrink-0">
+          3:2
+        </span>
+      </figcaption>
     </figure>
   );
 }
